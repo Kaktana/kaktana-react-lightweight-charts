@@ -1,6 +1,6 @@
 {
   "name": "react-lightweight-charts-wrapper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple react wrapper for the tradingview lightweight charts module",
   "main": "dist/index.js",
   "scripts": {
