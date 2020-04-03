@@ -2,10 +2,10 @@ var path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./index.js",
+  entry: "./src/react-lightweight-charts.js",
   output: {
     path: path.resolve("dist"),
-    filename: "index.js",
+    filename: "react-lightweight-charts.min.js",
     libraryTarget: "commonjs2"
   },
   module: {

@@ -1,8 +1,9 @@
 {
-  "name": "react-lightweight-charts-wrapper",
+  "name": "react-lightweight-charts",
   "version": "0.1.1",
   "description": "A simple react wrapper for the tradingview lightweight charts module",
-  "main": "dist/index.js",
+  "main": "dist/react-lightweight-charts.min.js",
+  "types": "types/react-lightweight-charts.d.ts",
   "scripts": {
     "build": "webpack"
   },
@@ -10,10 +11,15 @@
     "lightweight",
     "charts",
     "react",
-    "wrapper"
+    "wrapper",
+    "tradingview"
   ],
   "author": "Kaktana (https://kaktana.com)",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kaktana/react-lightweight-charts/issues"
+  },
+  "homepage": "https://github.com/Kaktana/react-lightweight-charts#readme",
+  "license": "MIT",
   "dependencies": {
     "fast-deep-equal": "^3.1.1",
     "lightweight-charts": "^2.0.0",
