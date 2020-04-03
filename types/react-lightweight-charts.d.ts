@@ -1,4 +1,4 @@
-declare module "react-lightweight-charts-wrapper" {
+declare module "react-lightweight-charts" {
     interface Props {
         candlestickSeries?: Array<any>,
         lineSeries?: Array<any>,
