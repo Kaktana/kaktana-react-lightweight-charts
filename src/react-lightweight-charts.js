@@ -7,7 +7,7 @@ const addSeriesFunctions = {
     line: "addLineSeries",
     area: "addAreaSeries",
     bar: "addBarSeries",
-    histogram: "addHistogramSeries"
+    histogram: "addHistogramSeries",
 };
 
 const colors = [
@@ -17,7 +17,7 @@ const colors = [
     "#FF4560",
     "#775DD0",
     "#F86624",
-    "#A5978B"
+    "#A5978B",
 ];
 
 class ChartWrapper extends React.Component {
@@ -42,12 +42,12 @@ class ChartWrapper extends React.Component {
                 [
                     prevProps.onCrosshairMove,
                     prevProps.onTimeRangeMove,
-                    prevProps.onClick
+                    prevProps.onClick,
                 ],
                 [
                     this.props.onCrosshairMove,
                     this.props.onTimeRangeMove,
-                    this.props.onClick
+                    this.props.onClick,
                 ]
             )
         )
@@ -60,7 +60,7 @@ class ChartWrapper extends React.Component {
                     prevProps.lineSeries,
                     prevProps.areaSeries,
                     prevProps.barSeries,
-                    prevProps.histogramSeries
+                    prevProps.histogramSeries,
                 ],
                 [
                     this.props.options,
@@ -68,7 +68,7 @@ class ChartWrapper extends React.Component {
                     this.props.lineSeries,
                     this.props.areaSeries,
                     this.props.barSeries,
-                    this.props.histogramSeries
+                    this.props.histogramSeries,
                 ]
             )
         ) {
@@ -85,11 +85,14 @@ class ChartWrapper extends React.Component {
         let width =
             this.chartDiv.current &&
             this.chartDiv.current.parentNode.clientWidth;
-        this.chart.resize(width, this.props.height || 500);
+        let height = this.chartDiv.current
+            ? this.chartDiv.current.parentNode.clientHeight
+            : props.height || 500;
+        this.chart.resize(width, height);
     };
 
     removeSeries = () => {
-        this.series.forEach(serie => this.chart.removeSeries(serie));
+        this.series.forEach((serie) => this.chart.removeSeries(serie));
         this.series = [];
     };
 
@@ -97,12 +100,12 @@ class ChartWrapper extends React.Component {
         const func = addSeriesFunctions[type];
         const series = this.chart[func]({
             color: colors[this.series.length % colors.length],
-            ...serie.options
+            ...serie.options,
         });
         series.setData(serie.data);
         if (serie.markers) series.setMarkers(serie.markers);
         if (serie.priceLines)
-            serie.priceLines.forEach(line => series.createPriceLine(line));
+            serie.priceLines.forEach((line) => series.createPriceLine(line));
         return series;
     };
 
@@ -110,32 +113,32 @@ class ChartWrapper extends React.Component {
         let series = this.series;
         let props = this.props;
         props.candlestickSeries &&
-            props.candlestickSeries.forEach(serie => {
+            props.candlestickSeries.forEach((serie) => {
                 series.push(this.addSeries(serie, "candlestick"));
             });
 
         props.lineSeries &&
-            props.lineSeries.forEach(serie => {
+            props.lineSeries.forEach((serie) => {
                 series.push(this.addSeries(serie, "line"));
             });
 
         props.areaSeries &&
-            props.areaSeries.forEach(serie => {
+            props.areaSeries.forEach((serie) => {
                 series.push(this.addSeries(serie, "area"));
             });
 
         props.barSeries &&
-            props.barSeries.forEach(serie => {
+            props.barSeries.forEach((serie) => {
                 series.push(this.addSeries(serie, "bar"));
             });
 
         props.histogramSeries &&
-            props.histogramSeries.forEach(serie => {
+            props.histogramSeries.forEach((serie) => {
                 series.push(this.addSeries(serie, "histogram"));
             });
     };
 
-    unsubscribeEvents = prevProps => {
+    unsubscribeEvents = (prevProps) => {
         let chart = this.chart;
         chart.unsubscribeClick(prevProps.onClick);
         chart.unsubscribeCrosshairMove(prevProps.onCrosshairMove);
@@ -164,8 +167,10 @@ class ChartWrapper extends React.Component {
             width: props.autoWidth
                 ? chartDiv.current.parentNode.clientWidth
                 : props.width,
-            height: props.height || 500,
-            ...props.options
+            height: props.autoHeight
+                ? chartDiv.current.parentNode.clientHeight
+                : props.height || 500,
+            ...props.options,
         };
         chart.applyOptions(options);
 
@@ -179,11 +184,7 @@ class ChartWrapper extends React.Component {
     };
 
     render() {
-        return (
-            <React.Fragment>
-                <div ref={this.chartDiv} />
-            </React.Fragment>
-        );
+        return <div ref={this.chartDiv} />;
     }
 }
 
