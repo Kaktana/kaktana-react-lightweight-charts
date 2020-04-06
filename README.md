@@ -6,19 +6,19 @@
 ##### Installing via npm
 
 ```bash
-npm install --save react-lightweight-charts
+npm install --save kaktana-react-lightweight-charts
 ```
 
 ##### Installing via yarn
 
 ```bash
-yarn add react-lightweight-charts
+yarn add kaktana-react-lightweight-charts
 ```
 
 ## Usage
 
 ```js
-import Chart from 'react-lightweight-charts'
+import Chart from 'kaktana-react-lightweight-charts'
 ```
 
 To create a basic candlestick chart with minimal configuration, write as follows:
@@ -72,4 +72,4 @@ class App extends Component {
 
 ## License
 
-react-lightweight-charts is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact.
+kaktana-react-lightweight-charts is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact.
