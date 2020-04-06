@@ -35,7 +35,7 @@ class ChartWrapper extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (!this.props.autoWidth)
+        if (!this.props.autoWidth && !this.props.autoHeight)
             window.removeEventListener("resize", this.resizeHandler);
         if (
             !equal(
@@ -83,11 +83,13 @@ class ChartWrapper extends React.Component {
 
     resizeHandler = () => {
         let width =
+            this.props.autoWidth &&
             this.chartDiv.current &&
             this.chartDiv.current.parentNode.clientWidth;
-        let height = this.chartDiv.current
-            ? this.chartDiv.current.parentNode.clientHeight
-            : props.height || 500;
+        let height =
+            this.props.autoHeight && this.chartDiv.current
+                ? this.chartDiv.current.parentNode.clientHeight
+                : this.props.height || 500;
         this.chart.resize(width, height);
     };
 
@@ -194,6 +196,7 @@ class ChartWrapper extends React.Component {
     };
 
     handleUpdateChart = () => {
+        window.removeEventListener("resize", this.resizeHandler);
         let { chart, chartDiv } = this;
         let props = this.props;
         let options = {
@@ -211,7 +214,7 @@ class ChartWrapper extends React.Component {
         this.handleEvents();
         this.handleTimeRange();
 
-        if (props.autoWidth)
+        if (props.autoWidth || props.autoHeight)
             // resize the chart with the window
             window.addEventListener("resize", this.resizeHandler);
     };
