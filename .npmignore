@@ -1,4 +1,5 @@
 webpack.config.js
 .gitignore
 .babelrc
+.prettierrc
 index.js
