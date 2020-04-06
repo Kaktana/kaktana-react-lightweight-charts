@@ -222,3 +222,4 @@ class ChartWrapper extends React.Component {
 }
 
 export default ChartWrapper;
+export * from "lightweight-charts";
