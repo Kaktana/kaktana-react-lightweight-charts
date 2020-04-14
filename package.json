@@ -22,7 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "fast-deep-equal": "^3.1.1",
-    "lightweight-charts": "^2.0.0",
+    "lightweight-charts": "^2.0.0"
+  },
+  "peerDependencies": {
     "react": "^16.13.1"
   },
   "devDependencies": {

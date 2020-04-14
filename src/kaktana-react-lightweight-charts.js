@@ -24,8 +24,10 @@ class ChartWrapper extends React.Component {
     constructor(props) {
         super(props);
         this.chartDiv = React.createRef();
+        this.legendDiv = React.createRef();
         this.chart = null;
         this.series = [];
+        this.legends = [];
     }
 
     componentDidMount() {
@@ -100,8 +102,11 @@ class ChartWrapper extends React.Component {
 
     addSeries = (serie, type) => {
         const func = addSeriesFunctions[type];
+        let color =
+            (serie.option && serie.options.color) ||
+            colors[this.series.length % colors.length];
         const series = this.chart[func]({
-            color: colors[this.series.length % colors.length],
+            color,
             ...serie.options
         });
         let data = this.handleLinearInterpolation(
@@ -112,6 +117,7 @@ class ChartWrapper extends React.Component {
         if (serie.markers) series.setMarkers(serie.markers);
         if (serie.priceLines)
             serie.priceLines.forEach(line => series.createPriceLine(line));
+        if (serie.legend) this.addLegend(series, color, serie.legend);
         return series;
     };
 
@@ -159,6 +165,9 @@ class ChartWrapper extends React.Component {
             chart.subscribeCrosshairMove(props.onCrosshairMove);
         props.onTimeRangeMove &&
             chart.subscribeVisibleTimeRangeChange(props.onTimeRangeMove);
+
+        // handle legend dynamical change
+        chart.subscribeCrosshairMove(this.handleLegends);
     };
 
     handleTimeRange = () => {
@@ -209,6 +218,8 @@ class ChartWrapper extends React.Component {
             ...props.options
         };
         chart.applyOptions(options);
+        this.legends = [];
+        if (this.props.legend) this.handleMainLegend();
 
         this.handleSeries();
         this.handleEvents();
@@ -219,8 +230,58 @@ class ChartWrapper extends React.Component {
             window.addEventListener("resize", this.resizeHandler);
     };
 
+    addLegend = (series, color, title) => {
+        this.legends.push({ series, color, title });
+    };
+
+    handleLegends = param => {
+        let div = this.legendDiv.current;
+        if (param.time && div && this.legends.length) {
+            div.innerHTML = "";
+            this.legends.forEach(({ series, color, title }) => {
+                let price = param.seriesPrices.get(series);
+                if (price !== undefined) {
+                    if (typeof price == "object") {
+                        color =
+                            price.open < price.close
+                                ? "rgba(0, 150, 136, 0.8)"
+                                : "rgba(255,82,82, 0.8)";
+                        price = `O: ${price.open}, H: ${price.high}, L: ${price.low}, C: ${price.close}`;
+                    }
+                    let row = document.createElement("div");
+                    row.innerText = title + " ";
+                    let priceElem = document.createElement("span");
+                    priceElem.style.color = color;
+                    priceElem.innerText = " " + price;
+                    row.appendChild(priceElem);
+                    div.appendChild(row);
+                }
+            });
+        }
+    };
+
+    handleMainLegend = () => {
+        if (this.legendDiv.current) {
+            let row = document.createElement("div");
+            row.innerText = this.props.legend;
+            this.legendDiv.current.appendChild(row);
+        }
+    };
+
     render() {
-        return <div ref={this.chartDiv} />;
+        return (
+            <div ref={this.chartDiv} style={{ position: "relative" }}>
+                <div
+                    ref={this.legendDiv}
+                    style={{
+                        position: "absolute",
+                        zIndex: 2,
+                        color: "#000A",
+                        padding: 10
+                    }}
+                />
+            </div>
+        );
     }
 }
 
