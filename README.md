@@ -96,14 +96,17 @@ class App extends Component {
 
 `SeriesObject` is an object with the following fields:
 
-- `options`: the serie-specific options. Please see the reference for the different serie types:
+- `options`: the series-specific options. Please see the reference for the different serie types:
     - [`candlestickSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/candlestick-series.md#customization)
     - [`barSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/bar-series.md#customization)
     - [`lineSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/line-series.md#customization)
     - [`areaSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/area-series.md#customization)
     - [`histogramSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/histogram-series.md#customization)
-- `legend`: the series legend to be displayed on the top-left corner of the chart. The value of the series at the selected time is displayed beside the text legend.
 - `data`: the series data. please refer to [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/series-basics.md#data)
+- `markers`: List of [Marker](https://github.com/tradingview/lightweight-charts/blob/master/docs/series-basics.md#setmarkers) to be displayed on the series.
+- `priceLines`: List of [PriceLine](https://github.com/tradingview/lightweight-charts/blob/master/docs/series-basics.md#createpriceline) to be displayed on the series.
+- `legend`: the series legend to be displayed on the top-left corner of the chart. The value of the series at the selected time is displayed beside the text legend.
+- `linearInterpolation`: A number in seconds to auto-fill series data if no data has been provided between two data points for more than the provided time range.
 
 ## License
 
