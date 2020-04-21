@@ -21,7 +21,7 @@ yarn add kaktana-react-lightweight-charts
 import Chart from 'kaktana-react-lightweight-charts'
 ```
 
-To create a basic candlestick chart with minimal configuration, write as follows:
+To create a basic candlestick chart, write as follows:
 ```javascript
 class App extends Component {
   constructor(props) {
@@ -70,6 +70,42 @@ class App extends Component {
 }
 ```
 
+## Wrapper props
+
+|Name|Type|Description|
+|----|----|-----------|
+|`options`|`object`|Defines the global options of the chart. [Refer to the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/customization.md)|
+|`autoWidth`|`boolean`|If true, the chart resizes automatically to 100% of its container width|
+|`autoHeight`|`boolean`|If true, the chart resizes automatically to 100% of its container height|
+|`width`|`number`|if `autoWidth` is false, defines the width of the chart in px|
+|`height`|`number`|if `autoHeight` is false, defines the height of the chart in px|
+|`legend`|`string`|Display a global legend on the top-left corner of the chart (can be considered as a title)|
+|`candlestickSeries`|`SeriesObject list`|List of candlestick series to be displayed|
+|`barSeries`|`SeriesObject list`|List of bar series to be displayed|
+|`lineSeries`|`SeriesObject list`|List of line series to be displayed|
+|`areaSeries`|`SeriesObject list`|List of area series to be displayed|
+|`histogramSeries`|`SeriesObject list`|List of histogram series to be displayed|
+|`onClick`|`MouseEventHandler`|Subscribe to click events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/events.md#mouseeventhandler)|
+|`onCrosshairMove`|`MouseEventHandler`|Subscribe to crosshair move events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/events.md#mouseeventhandler)|
+|`onTimeRangeMove`|`TimeRangeChangeEventHandler`|Subscribe to time range change events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/events.md#timerangechangeeventhandler)|
+|`from`|`Date`|Sets visible range from the specified date. Date object is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/time.md)|
+|`to`|`Date`|Sets visible range to the specified date. Date object is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/time.md)|
+
+
+### SeriesObject
+
+`SeriesObject` is an object with the following fields:
+
+- `options`: the serie-specific options. Please see the reference for the different serie types:
+    - [`candlestickSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/candlestick-series.md#customization)
+    - [`barSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/bar-series.md#customization)
+    - [`lineSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/line-series.md#customization)
+    - [`areaSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/area-series.md#customization)
+    - [`histogramSeries`](https://github.com/tradingview/lightweight-charts/blob/master/docs/histogram-series.md#customization)
+- `legend`: the series legend to be displayed on the top-left corner of the chart. The value of the series at the selected time is displayed beside the text legend.
+- `data`: the series data. please refer to [the official Docs](https://github.com/tradingview/lightweight-charts/blob/master/docs/series-basics.md#data)
+
 ## License
 
 kaktana-react-lightweight-charts is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact.
+
