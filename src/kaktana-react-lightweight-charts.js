@@ -243,7 +243,7 @@ class ChartWrapper extends React.Component {
         let { chart, chartDiv } = this;
         let props = this.props;
         let options = this.props.darkTheme ? darkTheme : lightTheme;
-        mergeDeep(options, {
+        options = mergeDeep(options, {
             width: props.autoWidth
                 ? chartDiv.current.parentNode.clientWidth
                 : props.width,
@@ -330,20 +330,18 @@ export * from "lightweight-charts";
 const isObject = (item) =>
     item && typeof item === "object" && !Array.isArray(item);
 
-const mergeDeep = (target, ...sources) => {
-    if (!sources.length) return target;
-    const source = sources.shift();
-
+const mergeDeep = (target, source) => {
+    let output = Object.assign({}, target);
     if (isObject(target) && isObject(source)) {
-        for (const key in source) {
+        Object.keys(source).forEach((key) => {
             if (isObject(source[key])) {
-                if (!target[key]) Object.assign(target, { [key]: {} });
-                mergeDeep(target[key], source[key]);
+                if (!(key in target))
+                    Object.assign(output, { [key]: source[key] });
+                else output[key] = mergeDeep(target[key], source[key]);
             } else {
-                Object.assign(target, { [key]: source[key] });
+                Object.assign(output, { [key]: source[key] });
             }
-        }
+        });
     }
-
-    return mergeDeep(target, ...sources);
+    return output;
 };
