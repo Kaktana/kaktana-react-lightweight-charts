@@ -20,6 +20,38 @@ const colors = [
     "#A5978B"
 ];
 
+const darkTheme = {
+    layout: {
+        backgroundColor: "#131722",
+        lineColor: "#2B2B43",
+        textColor: "#D9D9D9",
+    },
+    grid: {
+        vertLines: {
+            color: "#363c4e",
+        },
+        horzLines: {
+            color: "#363c4e",
+        },
+    },
+};
+
+const lightTheme = {
+    layout: {
+        backgroundColor: "#FFFFFF",
+        lineColor: "#2B2B43",
+        textColor: "#191919",
+    },
+    grid: {
+        vertLines: {
+            color: "#e1ecf2",
+        },
+        horzLines: {
+            color: "#e1ecf2",
+        },
+    },
+};
+
 class ChartWrapper extends React.Component {
     constructor(props) {
         super(props);
@@ -58,6 +90,7 @@ class ChartWrapper extends React.Component {
             !equal(
                 [
                     prevProps.options,
+                    prevProps.darkTheme,
                     prevProps.candlestickSeries,
                     prevProps.lineSeries,
                     prevProps.areaSeries,
@@ -66,6 +99,7 @@ class ChartWrapper extends React.Component {
                 ],
                 [
                     this.props.options,
+                    this.props.darkTheme,
                     this.props.candlestickSeries,
                     this.props.lineSeries,
                     this.props.areaSeries,
@@ -208,15 +242,16 @@ class ChartWrapper extends React.Component {
         window.removeEventListener("resize", this.resizeHandler);
         let { chart, chartDiv } = this;
         let props = this.props;
-        let options = {
+        let options = this.props.darkTheme ? darkTheme : lightTheme;
+        mergeDeep(options, {
             width: props.autoWidth
                 ? chartDiv.current.parentNode.clientWidth
                 : props.width,
             height: props.autoHeight
                 ? chartDiv.current.parentNode.clientHeight
                 : props.height || 500,
-            ...props.options
-        };
+            ...props.options,
+        });
         chart.applyOptions(options);
         this.legends = [];
         if (this.props.legend) this.handleMainLegend();
@@ -269,6 +304,10 @@ class ChartWrapper extends React.Component {
     };
 
     render() {
+        let color = this.props.darkTheme
+            ? darkTheme.layout.textColor
+            : lightTheme.layout.textColor;
+
         return (
             <div ref={this.chartDiv} style={{ position: "relative" }}>
                 <div
@@ -276,8 +315,8 @@ class ChartWrapper extends React.Component {
                     style={{
                         position: "absolute",
                         zIndex: 2,
-                        color: "#000A",
-                        padding: 10
+                        color,
+                        padding: 10,
                     }}
                 />
             </div>
@@ -287,3 +326,24 @@ class ChartWrapper extends React.Component {
 
 export default ChartWrapper;
 export * from "lightweight-charts";
+
+const isObject = (item) =>
+    item && typeof item === "object" && !Array.isArray(item);
+
+const mergeDeep = (target, ...sources) => {
+    if (!sources.length) return target;
+    const source = sources.shift();
+
+    if (isObject(target) && isObject(source)) {
+        for (const key in source) {
+            if (isObject(source[key])) {
+                if (!target[key]) Object.assign(target, { [key]: {} });
+                mergeDeep(target[key], source[key]);
+            } else {
+                Object.assign(target, { [key]: source[key] });
+            }
+        }
+    }
+
+    return mergeDeep(target, ...sources);
+};

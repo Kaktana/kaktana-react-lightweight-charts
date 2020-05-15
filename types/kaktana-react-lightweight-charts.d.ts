@@ -13,7 +13,8 @@ declare module "kaktana-react-lightweight-charts" {
         to?: number,
         onClick?: void,
         onCrosshairMove?: void,
-        onTimeRangeMove?: void
+        onTimeRangeMove?: void,
+        darkTheme?: boolean,
     }
 
     export default class ChartWrapper extends React.Component<Props> {}
