@@ -253,6 +253,7 @@ class ChartWrapper extends React.Component {
             ...props.options,
         });
         chart.applyOptions(options);
+        if (this.legendDiv.current) this.legendDiv.current.innerHTML = "";
         this.legends = [];
         if (this.props.legend) this.handleMainLegend();
 
