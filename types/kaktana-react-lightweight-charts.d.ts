@@ -1,3 +1,6 @@
+import { MouseEventHandler, TimeRangeChangeEventHandler } from 'lightweight-charts';
+import React from 'react';
+
 declare module "kaktana-react-lightweight-charts" {
     interface Props {
         candlestickSeries?: Array<any>,
@@ -9,11 +12,13 @@ declare module "kaktana-react-lightweight-charts" {
         height?: number,
         options?: object,
         autoWidth?: boolean,
+				autoHeight?: boolean,
+				legend?: string;
         from?: number,
         to?: number,
-        onClick?: void,
-        onCrosshairMove?: void,
-        onTimeRangeMove?: void,
+        onClick?: MouseEventHandler,
+        onCrosshairMove?: MouseEventHandler,
+        onTimeRangeMove?: TimeRangeChangeEventHandler,
         darkTheme?: boolean,
     }
 
