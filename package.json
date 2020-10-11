@@ -1,41 +1,41 @@
 {
-  "name": "kaktana-react-lightweight-charts",
-  "version": "1.1.2",
-  "description": "A simple react wrapper for the tradingview lightweight charts module",
-  "main": "dist/kaktana-react-lightweight-charts.min.js",
-  "types": "types/kaktana-react-lightweight-charts.d.ts",
-  "scripts": {
-    "build": "webpack"
-  },
-  "keywords": [
-    "lightweight",
-    "charts",
-    "react",
-    "wrapper",
-    "tradingview"
-  ],
-  "author": "Kaktana (https://kaktana.com)",
-  "bugs": {
-    "url": "https://github.com/Kaktana/kaktana-react-lightweight-charts/issues"
-  },
-  "homepage": "https://github.com/Kaktana/kaktana-react-lightweight-charts#readme",
-  "license": "MIT",
-  "dependencies": {
-    "fast-deep-equal": "^3.1.1",
-    "lightweight-charts": "^2.0.0"
-  },
-  "peerDependencies": {
-    "react": "^16.13.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^3.4.2",
-    "style-loader": "^1.1.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
-  }
+    "name": "kaktana-react-lightweight-charts",
+    "version": "1.1.3",
+    "description": "A simple react wrapper for the tradingview lightweight charts module",
+    "main": "dist/kaktana-react-lightweight-charts.min.js",
+    "types": "types/kaktana-react-lightweight-charts.d.ts",
+    "scripts": {
+        "build": "webpack"
+    },
+    "keywords": [
+        "lightweight",
+        "charts",
+        "react",
+        "wrapper",
+        "tradingview"
+    ],
+    "author": "Kaktana (https://kaktana.com)",
+    "bugs": {
+        "url": "https://github.com/Kaktana/kaktana-react-lightweight-charts/issues"
+    },
+    "homepage": "https://github.com/Kaktana/kaktana-react-lightweight-charts#readme",
+    "license": "MIT",
+    "dependencies": {
+        "fast-deep-equal": "^3.1.1",
+        "lightweight-charts": "^2.0.0"
+    },
+    "peerDependencies": {
+        "react": "^16.13.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/preset-env": "^7.9.0",
+        "@babel/preset-react": "^7.9.4",
+        "babel-loader": "^8.1.0",
+        "css-loader": "^3.4.2",
+        "style-loader": "^1.1.3",
+        "webpack": "^4.42.1",
+        "webpack-cli": "^3.3.11"
+    }
 }
