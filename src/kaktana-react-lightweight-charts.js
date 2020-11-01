@@ -137,7 +137,7 @@ class ChartWrapper extends React.Component {
     addSeries = (serie, type) => {
         const func = addSeriesFunctions[type];
         let color =
-            (serie.option && serie.options.color) ||
+            (serie.options && serie.options.color) ||
             colors[this.series.length % colors.length];
         const series = this.chart[func]({
             color,
