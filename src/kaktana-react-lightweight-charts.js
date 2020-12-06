@@ -140,6 +140,7 @@ class ChartWrapper extends React.Component {
             (serie.options && serie.options.color) ||
             colors[this.series.length % colors.length];
         const series = this.chart[func]({
+            title: serie.title,
             color,
             ...serie.options,
         });
