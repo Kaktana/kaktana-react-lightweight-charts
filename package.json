@@ -1,6 +1,6 @@
 {
     "name": "kaktana-react-lightweight-charts",
-    "version": "1.1.5",
+    "version": "2.0.0",
     "description": "A simple react wrapper for the tradingview lightweight charts module",
     "main": "dist/kaktana-react-lightweight-charts.min.js",
     "types": "types/kaktana-react-lightweight-charts.d.ts",
@@ -22,7 +22,7 @@
     "license": "MIT",
     "dependencies": {
         "fast-deep-equal": "^3.1.1",
-        "lightweight-charts": "^2.0.0"
+        "lightweight-charts": "^3.3.0"
     },
     "peerDependencies": {
         "react": "^16.13.1"
