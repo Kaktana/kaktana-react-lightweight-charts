@@ -18,6 +18,7 @@ module.exports = {
         ]
     },
     externals: {
-        react: "react"
+        react: "react",
+        "lightweight-charts": "lightweight-charts",
     }
 };
