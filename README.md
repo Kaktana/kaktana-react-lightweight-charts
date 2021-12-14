@@ -86,7 +86,7 @@ class App extends Component {
 
 |Name|Type|Description|
 |----|----|-----------|
-|`options`|`object`|Defines the global options of the chart. [Refer to the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/customization.md)|
+|`options`|`object`|Defines the global options of the chart. [Refer to the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/customization.md)|
 |`autoWidth`|`boolean`|If true, the chart resizes automatically to 100% of its container width|
 |`autoHeight`|`boolean`|If true, the chart resizes automatically to 100% of its container height|
 |`width`|`number`|if `autoWidth` is false, defines the width of the chart in px|
@@ -97,11 +97,11 @@ class App extends Component {
 |`lineSeries`|`SeriesObject list`|List of line series to be displayed|
 |`areaSeries`|`SeriesObject list`|List of area series to be displayed|
 |`histogramSeries`|`SeriesObject list`|List of histogram series to be displayed|
-|`onClick`|`MouseEventHandler`|Subscribe to click events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/events.md#mouseeventhandler)|
-|`onCrosshairMove`|`MouseEventHandler`|Subscribe to crosshair move events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/events.md#mouseeventhandler)|
-|`onTimeRangeMove`|`TimeRangeChangeEventHandler`|Subscribe to time range change events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/events.md#timerangechangeeventhandler)|
-|`from`|`Date`|Sets visible range from the specified date. Date object is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/time.md)|
-|`to`|`Date`|Sets visible range to the specified date. Date object is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/time.md)|
+|`onClick`|`MouseEventHandler`|Subscribe to click events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/events.md#mouseeventhandler)|
+|`onCrosshairMove`|`MouseEventHandler`|Subscribe to crosshair move events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/events.md#mouseeventhandler)|
+|`onTimeRangeMove`|`TimeRangeChangeEventHandler`|Subscribe to time range change events. The callback function is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/events.md#timerangechangeeventhandler)|
+|`from`|`Date`|Sets visible range from the specified date. Date object is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/time.md)|
+|`to`|`Date`|Sets visible range to the specified date. Date object is defined in [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/time.md)|
 |`darkTheme`|`boolean`|If true, a custom dark theme palette is applied to the chart|
 
 ### SeriesObject
@@ -109,14 +109,14 @@ class App extends Component {
 `SeriesObject` is an object with the following fields:
 
 - `options`: the series-specific options. Please see the reference for the different serie types:
-    - [`candlestickSeries`](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/candlestick-series.md#customization)
-    - [`barSeries`](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/bar-series.md#customization)
-    - [`lineSeries`](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/line-series.md#customization)
-    - [`areaSeries`](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/area-series.md#customization)
-    - [`histogramSeries`](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/histogram-series.md#customization)
-- `data`: the series data. please refer to [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/series-basics.md#data)
-- `markers`: List of [Marker](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/series-basics.md#setmarkers) to be displayed on the series.
-- `priceLines`: List of [PriceLine](https://github.com/tradingview/lightweight-charts/tree/v2.0.0/docs/series-basics.md#createpriceline) to be displayed on the series.
+    - [`candlestickSeries`](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/candlestick-series.md#customization)
+    - [`barSeries`](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/bar-series.md#customization)
+    - [`lineSeries`](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/line-series.md#customization)
+    - [`areaSeries`](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/area-series.md#customization)
+    - [`histogramSeries`](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/histogram-series.md#customization)
+- `data`: the series data. please refer to [the official Docs](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/series-basics.md#data)
+- `markers`: List of [Marker](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/series-basics.md#setmarkers) to be displayed on the series.
+- `priceLines`: List of [PriceLine](https://github.com/tradingview/lightweight-charts/tree/v3.3.0/docs/series-basics.md#createpriceline) to be displayed on the series.
 - `legend`: the series legend to be displayed on the top-left corner of the chart. The value of the series at the selected time is displayed beside the text legend.
 - `linearInterpolation`: A number in seconds to auto-fill series data if no data has been provided between two data points for more than the provided time range.
 
@@ -125,8 +125,8 @@ class App extends Component {
 kaktana-react-lightweight-charts is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact.
 
 
-[lightweight-charts-version-img]: https://img.shields.io/badge/lightweight--charts-v2.0.0-brightgreen
-[lightweight-charts-link]: https://github.com/tradingview/lightweight-charts/tree/v2.0.0
+[lightweight-charts-version-img]: https://img.shields.io/badge/lightweight--charts-v3.3.0-brightgreen
+[lightweight-charts-link]: https://github.com/tradingview/lightweight-charts/tree/v3.3.0
 
 [npm-version-img]: https://badge.fury.io/js/kaktana-react-lightweight-charts.svg
 [npm-downloads-img]: https://img.shields.io/npm/dm/kaktana-react-lightweight-charts.svg
