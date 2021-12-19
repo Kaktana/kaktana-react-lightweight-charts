@@ -23,6 +23,7 @@ declare module "kaktana-react-lightweight-charts" {
         onCrosshairMove?: MouseEventHandler;
         onTimeRangeMove?: TimeRangeChangeEventHandler;
         darkTheme?: boolean;
+        alwaysClean?: boolean;
     }
 
     export default class ChartWrapper extends React.Component<Props> {}
