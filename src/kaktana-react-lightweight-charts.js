@@ -10,6 +10,14 @@ const addSeriesFunctions = {
     histogram: "addHistogramSeries",
 };
 
+const seriesMapping = {
+    candlestickSeries: 'candlestick',
+    lineSeries: 'line',
+    areaSeries: 'area',
+    barSeries: 'bar',
+    histogramSeries: 'histogram',
+}
+
 const colors = [
     "#008FFB",
     "#00E396",
@@ -58,13 +66,19 @@ class ChartWrapper extends React.Component {
         this.chartDiv = React.createRef();
         this.legendDiv = React.createRef();
         this.chart = null;
-        this.series = [];
+        this.series = {
+            candlestickSeries: [],
+            lineSeries: [],
+            areaSeries: [],
+            barSeries: [],
+            histogramSeries: [],
+        };
         this.legends = [];
     }
 
     componentDidMount() {
         this.chart = createChart(this.chartDiv.current);
-        this.handleUpdateChart();
+        this.handleInitChart();
         this.resizeHandler();
     }
 
@@ -86,31 +100,45 @@ class ChartWrapper extends React.Component {
             )
         )
             this.unsubscribeEvents(prevProps);
+        let reInit = this.props.alwaysClean;
+
         if (
             !equal(
                 [
                     prevProps.options,
                     prevProps.darkTheme,
-                    prevProps.candlestickSeries,
-                    prevProps.lineSeries,
-                    prevProps.areaSeries,
-                    prevProps.barSeries,
-                    prevProps.histogramSeries,
+                    prevProps.candlestickSeries?.length,
+                    prevProps.lineSeries?.length,
+                    prevProps.areaSeries?.length,
+                    prevProps.barSeries?.length,
+                    prevProps.histogramSeries?.length,
                 ],
                 [
                     this.props.options,
                     this.props.darkTheme,
-                    this.props.candlestickSeries,
-                    this.props.lineSeries,
-                    this.props.areaSeries,
-                    this.props.barSeries,
-                    this.props.histogramSeries,
+                    this.props.candlestickSeries?.length,
+                    this.props.lineSeries?.length,
+                    this.props.areaSeries?.length,
+                    this.props.barSeries?.length,
+                    this.props.histogramSeries?.length,
                 ]
             )
         ) {
+            reInit = true;
+        }
+
+        if (reInit) {
             this.removeSeries();
-            this.handleUpdateChart();
-        } else if (
+            this.handleInitChart();
+        } else {
+            Object.keys(this.series).forEach(seriesType => {
+                this.series[seriesType].forEach((series, i) => {
+                    series.setData(this.props[seriesType][i].data);
+                })
+            });
+        }
+
+        if (
             prevProps.from !== this.props.from ||
             prevProps.to !== this.props.to
         )
@@ -130,8 +158,12 @@ class ChartWrapper extends React.Component {
     };
 
     removeSeries = () => {
-        this.series.forEach((serie) => this.chart.removeSeries(serie));
-        this.series = [];
+        Object.values(this.series).forEach(items => {
+            items.forEach((serie) => this.chart.removeSeries(serie));
+        });
+        Object.keys(this.series).forEach(seriesType => {
+           this.series[seriesType] = [];
+        });
     };
 
     addSeries = (serie, type) => {
@@ -156,32 +188,15 @@ class ChartWrapper extends React.Component {
     };
 
     handleSeries = () => {
-        let series = this.series;
         let props = this.props;
-        props.candlestickSeries &&
-            props.candlestickSeries.forEach((serie) => {
-                series.push(this.addSeries(serie, "candlestick"));
-            });
 
-        props.lineSeries &&
-            props.lineSeries.forEach((serie) => {
-                series.push(this.addSeries(serie, "line"));
-            });
-
-        props.areaSeries &&
-            props.areaSeries.forEach((serie) => {
-                series.push(this.addSeries(serie, "area"));
-            });
-
-        props.barSeries &&
-            props.barSeries.forEach((serie) => {
-                series.push(this.addSeries(serie, "bar"));
-            });
-
-        props.histogramSeries &&
-            props.histogramSeries.forEach((serie) => {
-                series.push(this.addSeries(serie, "histogram"));
-            });
+        Object.entries(seriesMapping).forEach(([propName, seriesName]) => {
+            if (props[propName]) {
+                props[propName].forEach(serie => {
+                    this.series[propName].push(this.addSeries(serie, seriesName));
+                })
+            }
+        })
     };
 
     unsubscribeEvents = (prevProps) => {
@@ -238,7 +253,7 @@ class ChartWrapper extends React.Component {
         return newData.filter((x) => x);
     };
 
-    handleUpdateChart = () => {
+    handleInitChart = () => {
         window.removeEventListener("resize", this.resizeHandler);
         let { chart, chartDiv } = this;
         let props = this.props;
