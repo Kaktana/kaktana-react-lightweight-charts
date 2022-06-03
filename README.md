@@ -11,6 +11,12 @@
 
 </div>
 
+### Important Notice:
+
+This repo is no longer maintained and is therefore deprecated.
+You can get a maintained version of this repo in the following fork:
+https://github.com/Qognica/qognicafinance-react-lightweight-charts
+
 <!-- markdownlint-enable no-inline-html -->
 
 ## Download and Installation
